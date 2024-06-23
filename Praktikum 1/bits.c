@@ -35,6 +35,50 @@ int hibana(int a, int b, int c){
     return ((q & c) | (~q & z));
 }
 
+// hatsune_miku_no_geishou
+hatsune_miku_no_geishou(int x, int y){
+  int sum = x + y;
+  int min = 1 << 31;
+  int overflow = ((x ^ sum) & (y ^ sum)) >> 31;
+  return (overflow & (sum >> 31 ^ min)) | (~overflow & sum);
+}
+
+// internet_overdose
+int internet_overdose(int i) {
+  int a = 0xFF << 8;
+  int b = (0xF << 20) | 0xF0;
+  int c = (0xC << 24) | (0xC << 16) | (0xC << 8) | 0xC;
+  int d = (0x22 << 24) | (0x22 << 16) | (0x22 << 8) | 0x22;
+
+  int t = (i ^ (i >> 8)) & a;
+  i = i ^ t ^ (t << 8);
+  t = (i ^ (i >> 4)) & b;
+  i = i ^ t ^ (t << 4);
+  t = (i ^ (i >> 2)) & c;
+  i = i ^ t ^ (t << 2);
+  t = (i ^ (i >> 1)) & d;
+  i = i ^ t ^ (t << 1);
+  return i;
+  }
+
+//haikei_doppelganger
+int haikei_doppelganger(int x){
+int c1 = x & 0xff;
+int c2 = (x >> 8) & 0xff;
+int c3 = (x >> 16) & 0xff;
+int c4 = (x >> 24) & 0xff;
+
+int l1 = ~64;
+int l2= ~90;
+int l3 = ~96;
+int l4 = ~122;
+
+int check1 = (((c1+l1)^(c1+l2) | (c1+l3)^(c1+l4)) >> 31) & 1;
+int check2 = (((c2+l1)^(c2+l2) | (c2+l3)^(c2+l4)) >> 31) & 1;
+int check3 = (((c3+l1)^(c3+l2) | (c3+l3)^(c3+l4)) >> 31) & 1;
+int check4 = (((c4+l1)^(c4+l2) | (c4+l3)^(c4+l4)) >> 31) & 1;
+return check1 & check2 & check3 & check4;
+}
 // oshama_scramble
 /* 
  * float_f2i - Return bit-level equivalent of expression (int) f
