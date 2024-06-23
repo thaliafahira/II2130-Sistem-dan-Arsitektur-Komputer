@@ -79,6 +79,16 @@ int check3 = (((c3+l1)^(c3+l2) | (c3+l3)^(c3+l4)) >> 31) & 1;
 int check4 = (((c4+l1)^(c4+l2) | (c4+l3)^(c4+l4)) >> 31) & 1;
 return check1 & check2 & check3 & check4;
 }
+
+// caliburne_story_of_the_legendary_sword
+unsigned caliburne_story_of_the_legendary_sword(unsigned x){
+  int a = x & 127;
+  int b = !(!a);
+  int c = x >> 7;
+  a = (a + a + a + a + a) >> 7;
+  c = c + c + c + c + c;
+  return a + b + c;
+}
 // oshama_scramble
 /* 
  * float_f2i - Return bit-level equivalent of expression (int) f
@@ -134,7 +144,39 @@ int oshama_scramble(unsigned uf) {
   return res;
 }
 
+// regulus
+unsigned regulus(unsigned uf){
+  int sign = uf & (0x80 << 24);
+  int exp = (0x7F << 24) | (0x80 << 16);
+  int ufexp = uf & exp;
+  int isZero = !ufexp;
+  if (isZero){
+    uf = (uf << 1) | sign;
+  } 
+  else if (ufexp != exp){
+    uf += (1 << 23);
+  }
+  return uf;
+}
 
+// the_flame_seal_135_seconds
+int the_flame_seal_135_seconds(int x){
+  int temp = 0;
+  x = ~x;
+  x |= (x >> 1);
+  x |= (x >> 2);
+  x |= (x >> 4);
+  x |= (x >> 8);
+  x |= (x >> 16);
+  x = x + 0x1 + ~((x >> 1) & ((0x55 << 24) + (0x55 << 16) + (0x55 << 8) + 0x55));
+  temp = (0x33 << 24) + (0x33 << 16) + (0x33 << 8) + (0x33);
+  x = (((x >> 2) & temp) + (x & temp));
+  x = (((x >> 24) + x) & ((0x0f << 24) + (0x0f << 16) + (0x0f << 8) + (0x0f)));
+  x += (x >> 8);
+  x += (x >> 16);
+  x = x & 0x0000003f;
+  return 32 + 0x1 + ~x;
+}
 
 
 
@@ -149,5 +191,10 @@ int oshama_scramble(unsigned uf) {
  */
 int bitXor(int x, int y) {
   return (~(x & y)) & (~((~x) & (~y)));
+}
+
+// the_flame_seal_135_seconds
+int the_flame_seal_135_seconds(int x){
+  return 2;
 }
 
